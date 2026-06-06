@@ -1021,6 +1021,35 @@ button {
   padding-bottom: 0.5rem;
 }
 
+.record-pagination {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 0.7rem;
+  margin-top: 1rem;
+}
+
+.record-pagination button {
+  min-height: 38px;
+  border: 1px solid rgba(212, 25, 35, 0.5);
+  padding: 0.55rem 0.9rem;
+  color: var(--paper);
+  background: rgba(0, 0, 0, 0.4);
+}
+
+.record-pagination button:disabled {
+  cursor: not-allowed;
+  opacity: 0.35;
+}
+
+.record-pagination span {
+  color: var(--acid);
+  font-family: Consolas, "IBM Plex Mono", monospace;
+  font-size: 0.86rem;
+}
+
 .story-card {
   position: relative;
   min-height: 100%;

@@ -31,7 +31,10 @@
     category: 'ALL',
     selectedId: '',
     visibleRecords: [],
+    page: 1,
   };
+
+  const pageSize = 3;
 
   function readJson(key, fallback) {
     try {
@@ -114,6 +117,7 @@
     filterTabs.querySelectorAll('[data-filter]').forEach((button) => {
       button.addEventListener('click', () => {
         state.category = button.dataset.filter;
+        state.page = 1;
         render();
       });
     });
@@ -180,6 +184,39 @@
         </div>
       </article>
     `).join('');
+  }
+
+  function renderPagination(total) {
+    let pager = document.querySelector('#record-pagination');
+    if (!pager) {
+      pager = document.createElement('div');
+      pager.className = 'record-pagination';
+      pager.id = 'record-pagination';
+      list.after(pager);
+    }
+
+    const totalPages = Math.max(1, Math.ceil(total / pageSize));
+    if (state.page > totalPages) state.page = totalPages;
+
+    if (totalPages <= 1) {
+      pager.innerHTML = '';
+      return;
+    }
+
+    pager.innerHTML = `
+      <button type="button" data-page-action="prev" ${state.page === 1 ? 'disabled' : ''}>이전</button>
+      <span>${state.page} / ${totalPages}</span>
+      <button type="button" data-page-action="next" ${state.page === totalPages ? 'disabled' : ''}>다음</button>
+    `;
+
+    pager.querySelectorAll('[data-page-action]').forEach((button) => {
+      button.addEventListener('click', () => {
+        const action = button.dataset.pageAction;
+        state.page += action === 'next' ? 1 : -1;
+        render();
+        document.querySelector('#archive').scrollIntoView({ behavior: 'smooth', block: 'start' });
+      });
+    });
   }
 
   function renderEvidence(records) {
@@ -254,22 +291,26 @@
     const allRecords = getRecords();
     const filtered = getFilteredRecords();
     state.visibleRecords = filtered;
+    const totalPages = Math.max(1, Math.ceil(filtered.length / pageSize));
+    if (state.page > totalPages) state.page = totalPages;
+    const pageRecords = filtered.slice((state.page - 1) * pageSize, state.page * pageSize);
 
     if (!filtered.some((record) => record.id === state.selectedId)) {
-      state.selectedId = filtered[0]?.id || '';
+      state.selectedId = pageRecords[0]?.id || filtered[0]?.id || '';
     }
 
     const selected = filtered.find((record) => record.id === state.selectedId);
     renderTabs(allRecords);
     renderFeatured(selected);
-    renderRecords(filtered);
+    renderRecords(pageRecords);
+    renderPagination(filtered.length);
     renderEvidence(filtered);
     renderImageOnlyGallery();
     renderShortStories();
     renderAnecdotes();
     renderDreams();
 
-    archiveCount.textContent = `${filtered.length}개 기록 응답 중`;
+    archiveCount.textContent = `${filtered.length}개 기록 응답 중 / ${state.page}페이지`;
     searchOutput.textContent = searchInput.value.trim()
       ? `${filtered.length}개 기록이 검색어에 반응했습니다.`
       : '필터를 바꾸면 선택 기록과 이미지가 즉시 갱신됩니다.';
@@ -335,7 +376,10 @@
   });
 
   dialogClose.addEventListener('click', () => dialog.close());
-  searchInput.addEventListener('input', render);
+  searchInput.addEventListener('input', () => {
+    state.page = 1;
+    render();
+  });
 
   function updateWatcher() {
     if (!watcherCode || !watcherMessage || !watcherBar) return;
