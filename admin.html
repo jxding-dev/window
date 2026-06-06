@@ -1,0 +1,123 @@
+<!doctype html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>RED WINDOW ADMIN</title>
+    <link rel="stylesheet" href="./css/styles.css" />
+  </head>
+  <body class="admin-body">
+    <div class="noise" aria-hidden="true"></div>
+    <div class="haunt-layer" aria-hidden="true">
+      <span>작성자가 비어 있습니다</span>
+      <span>저장 전에 이미 공개됨</span>
+      <span>관리자 수 2</span>
+      <span>삭제 실패</span>
+    </div>
+    <div class="apparition" id="apparition" aria-hidden="true">방금 저장되지 않은 글이 공개되었습니다</div>
+    <div class="terminal-bleed" aria-hidden="true">
+      <span>admin://quarantine.write</span>
+      <span>author: unknown</span>
+      <span>delete_request: refused</span>
+      <span>draft_count: breathing</span>
+    </div>
+    <header class="site-header">
+      <a class="brand glitch-text" href="./index.html" data-text="RED WINDOW ADMIN">RED WINDOW ADMIN</a>
+      <nav class="main-nav" aria-label="관리자 메뉴">
+        <a href="./index.html">사이트</a>
+        <a href="#editor">글 작성</a>
+        <a href="#records">삭제 관리</a>
+      </nav>
+    </header>
+
+    <main class="admin-shell">
+      <section class="admin-gate app-panel" id="admin-gate">
+        <p class="kicker">PRIVATE ACCESS</p>
+        <h1>관리자 열람실</h1>
+        <p>게시 위치를 골라 글을 등록할 수 있습니다. 이 페이지의 작성 내용은 현재 브라우저에만 저장됩니다.</p>
+        <form id="login-form">
+          <label>
+            관리자 비밀번호
+            <input id="admin-password" type="password" autocomplete="current-password" />
+          </label>
+          <button type="submit">접속</button>
+        </form>
+        <p class="admin-message" id="login-message"></p>
+      </section>
+
+      <section class="admin-workspace is-hidden" id="admin-workspace">
+        <section class="admin-status-grid">
+          <article>
+            <span>QUARANTINE</span>
+            <strong>작성 권한 격리됨</strong>
+            <p>방문자는 읽기만 가능하며, 새 기록은 이 관리자 열람실에서만 생성됩니다.</p>
+          </article>
+          <article>
+            <span>CONTENT ROUTE</span>
+            <strong>세 갈래 보관</strong>
+            <p>긴 게시글, 짧은 괴담, 실제 일화가 서로 다른 위치로 저장됩니다.</p>
+          </article>
+          <article>
+            <span>LOCAL VAULT</span>
+            <strong>브라우저 저장소</strong>
+            <p>정적 사이트이므로 작성 기록은 현재 브라우저의 localStorage에 보관됩니다.</p>
+          </article>
+        </section>
+        <section class="app-panel" id="editor">
+          <p class="kicker">CREATE CONTENT</p>
+          <h1>새 글 작성</h1>
+          <form class="admin-form" id="record-form">
+            <label class="full">
+              게시 위치
+              <select name="contentType" id="content-type">
+                <option value="long">긴 게시글 / 상세 페이지</option>
+                <option value="short">짧은 괴담</option>
+                <option value="anecdote">실제 일화</option>
+                <option value="dream">관리자가 오늘 꾼 꿈</option>
+              </select>
+            </label>
+
+            <label class="field-common">제목<input name="title" required placeholder="예: 현관 센서등이 꺼지지 않는 밤" /></label>
+            <label class="field-long">분류<input name="category" placeholder="예: 생활 소음" /></label>
+            <label class="field-long">문서 번호<input name="code" placeholder="예: RWA-NEW-001" /></label>
+            <label class="field-long">위험도
+              <select name="danger">
+                <option>LOW</option>
+                <option selected>MEDIUM</option>
+                <option>HIGH</option>
+              </select>
+            </label>
+            <label class="field-long">발견 시각<input name="discoveredAt" placeholder="2026.06.06 03:33" /></label>
+            <label class="field-long field-anecdote">장소 / 발견 위치<input name="location" placeholder="예: 서울, 오래된 원룸" /></label>
+            <label class="field-long">복원률<input name="recovery" placeholder="66%" /></label>
+            <label class="field-short">태그<input name="tag" placeholder="예: 30초 괴담" /></label>
+            <label class="field-anecdote">상태<input name="status" placeholder="예: 제보자 녹취 보관" /></label>
+            <label class="field-dream">꿈 날짜<input name="dreamDate" placeholder="예: 오늘 03:33" /></label>
+            <label class="field-dream">꿈 상태<input name="dreamMood" placeholder="예: 악몽 / 반복됨 / 선명함" /></label>
+            <label class="field-long full">부제<textarea name="subtitle" rows="2" placeholder="상세 페이지 상단에 들어갈 한 줄"></textarea></label>
+            <label class="field-long full">요약<textarea name="summary" rows="3" placeholder="메인 카드에 보일 요약"></textarea></label>
+            <label class="field-common full">본문<textarea name="body" required rows="8" placeholder="긴 게시글은 문단을 줄바꿈으로 구분합니다. 짧은 괴담/일화는 본문만 입력해도 됩니다."></textarea></label>
+            <label class="field-long field-dream full">이미지 업로드<input name="image" type="file" accept="image/*" /></label>
+            <button type="submit">저장</button>
+          </form>
+          <p class="admin-message" id="save-message"></p>
+        </section>
+
+        <section class="app-panel" id="records">
+          <div class="admin-panel-head">
+            <div>
+              <p class="kicker">DELETE CONTENT</p>
+              <h1>콘텐츠 삭제 관리</h1>
+            </div>
+            <button type="button" id="restore-defaults">기본 콘텐츠 복구</button>
+          </div>
+          <div class="admin-record-list" id="admin-record-list"></div>
+        </section>
+      </section>
+    </main>
+
+    <script src="./data/data.js"></script>
+    <script src="./js/fear.js"></script>
+    <script src="./js/admin.js"></script>
+  </body>
+</html>
