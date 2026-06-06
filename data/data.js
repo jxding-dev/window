@@ -18,7 +18,7 @@ window.RED_WINDOW_DEFAULT_RECORDS = [
       '마지막 파일은 제보자가 이사하겠다고 말한 날 녹음됐다. 03:32:59, 숨소리. 03:33:00, 싱크대 아래에서 세 번. 03:33:03, 방 안쪽에서 세 번. 그리고 제보자 목소리와 거의 같은 음성이 휴대폰 바로 옆에서 말했다. “오늘은 네가 먼저 두드렸잖아.” 그 뒤 11초 동안은 아무 소리도 없다. 11초 뒤 제보자가 울면서 “저 말 아직 안 했는데요”라고 속삭인다.',
       '현재 해당 원룸은 공실이다. 관리비 고지서에는 수도 사용량이 계속 찍힌다. 이상한 점은 사용량이 늘어나는 시간이 매번 03:33이고, 계량기 사진을 찍으면 숫자판 유리에 휴대폰을 들고 있는 사람이 비친다는 것이다. 얼굴은 보이지 않는다. 다만 싱크대 문 안쪽에서 바깥을 보는 자세와 정확히 같다.',
     ],
-    image: './assets/post-kitchen-hallway.png',
+    image: './assets/gallery-sink-teeth.png',
     discoveredAt: '2026.06.06 03:33',
     location: '반지하 원룸 302호',
     recovery: '83%',
@@ -192,6 +192,24 @@ window.RED_WINDOW_DREAM_RECORDS = [
 ];
 
 window.RED_WINDOW_GALLERY_IMAGES = [
+  {
+    id: 'gallery-sink-teeth',
+    src: './assets/gallery-sink-teeth.png',
+    title: '배수구 주변의 젖은 이빨',
+    code: 'IMG-0333-SINK',
+  },
+  {
+    id: 'gallery-bedroom-footprints',
+    src: './assets/gallery-bedroom-footprints.png',
+    title: '이불을 밟지 않는 발자국',
+    code: 'IMG-0412-BED',
+  },
+  {
+    id: 'gallery-freezer-face',
+    src: './assets/gallery-freezer-face.png',
+    title: '냉동고 안쪽의 얼굴 자국',
+    code: 'IMG-0808-FREEZER',
+  },
   {
     id: 'gallery-mirror-window',
     src: './assets/gallery-mirror-window.png',
