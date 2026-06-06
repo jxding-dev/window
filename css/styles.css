@@ -359,6 +359,7 @@ button {
 }
 
 .identity-check,
+.product-showcase,
 .quick-board,
 .anecdote-board,
 .dream-board,
@@ -377,6 +378,99 @@ button {
   gap: 1rem;
   border-top: 1px solid var(--line);
   background: #040605;
+}
+
+.product-showcase {
+  position: relative;
+  overflow: hidden;
+  border-top: 1px solid rgba(212, 25, 35, 0.24);
+  background:
+    linear-gradient(135deg, rgba(212, 25, 35, 0.1), transparent 20rem),
+    linear-gradient(180deg, rgba(157, 255, 189, 0.035), transparent 18rem),
+    #030504;
+}
+
+.product-showcase::before {
+  content: "";
+  position: absolute;
+  inset: 1.2rem;
+  pointer-events: none;
+  border: 1px solid rgba(157, 255, 189, 0.08);
+}
+
+.experience-grid {
+  position: relative;
+  z-index: 1;
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 1rem;
+  margin-top: 1.6rem;
+}
+
+.experience-grid article {
+  min-height: 15rem;
+  display: grid;
+  align-content: space-between;
+  gap: 1rem;
+  border: 1px solid rgba(157, 255, 189, 0.16);
+  padding: 1.05rem;
+  background:
+    linear-gradient(180deg, rgba(10, 22, 17, 0.72), rgba(0, 0, 0, 0.52)),
+    rgba(0, 0, 0, 0.38);
+}
+
+.experience-grid span {
+  width: fit-content;
+  border: 1px solid rgba(212, 25, 35, 0.6);
+  padding: 0.25rem 0.45rem;
+  color: var(--red);
+  font-family: Consolas, "IBM Plex Mono", monospace;
+  font-size: 0.74rem;
+}
+
+.experience-grid h3 {
+  margin: 0;
+  color: var(--paper);
+  font-family: "Noto Serif KR", serif;
+  font-size: 1.45rem;
+  line-height: 1.24;
+}
+
+.experience-grid p {
+  margin: 0;
+  color: rgba(215, 208, 195, 0.7);
+  line-height: 1.72;
+}
+
+.metric-strip {
+  position: relative;
+  z-index: 1;
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 1px;
+  margin-top: 1rem;
+  border: 1px solid rgba(157, 255, 189, 0.16);
+  background: rgba(157, 255, 189, 0.14);
+}
+
+.metric-strip div {
+  display: grid;
+  gap: 0.2rem;
+  padding: 1rem;
+  background: rgba(3, 6, 5, 0.9);
+}
+
+.metric-strip strong {
+  color: var(--paper);
+  font-family: "Noto Serif KR", serif;
+  font-size: clamp(1.65rem, 4vw, 2.75rem);
+  line-height: 1;
+}
+
+.metric-strip span {
+  color: rgba(157, 255, 189, 0.74);
+  font-family: Consolas, "IBM Plex Mono", monospace;
+  font-size: 0.78rem;
 }
 
 .identity-panel,
@@ -1773,6 +1867,8 @@ button {
   }
 
   .identity-check,
+  .experience-grid,
+  .metric-strip,
   .admin-status-grid,
   .quick-grid,
   .anecdote-list,

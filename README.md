@@ -1,6 +1,7 @@
 # RED WINDOW Static Site
 
 RED WINDOW is a static horror reading site for long-form records, short stories, reported anecdotes, dream logs, and image evidence.
+It is structured as a client-ready horror content package rather than a generic board.
 
 ## Structure
 
@@ -37,3 +38,11 @@ git -C site push origin main:gh-pages
 
 The public site is built around static content and lazy-loaded imagery.
 Global animated horror effects were removed from runtime code so long posts and image grids stay readable on weaker devices.
+
+## Commercial Polish Checklist
+
+- Public readers only see content, search, pagination, and image viewing.
+- Admin tools stay isolated in a separate unlinked page.
+- The curation section explains the reading funnel without breaking the horror tone.
+- Long-form records are paginated to keep the main page readable.
+- Images are lazy-loaded or explicitly prioritized depending on their position.
