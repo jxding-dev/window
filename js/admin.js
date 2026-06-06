@@ -1,5 +1,5 @@
 (function () {
-  const ADMIN_PASSWORD = ['red', 'window', '0333'].join('');
+  const ADMIN_PASSWORD = ['dlwlgus', '22209'].join('');
   const keys = window.RED_WINDOW_STORAGE_KEYS;
   const defaults = window.RED_WINDOW_DEFAULT_RECORDS || [];
   const defaultShortStories = window.RED_WINDOW_SHORT_STORIES || [];
