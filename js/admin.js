@@ -15,14 +15,6 @@
   const saveMessage = document.querySelector('#save-message');
   const recordList = document.querySelector('#admin-record-list');
   const restoreButton = document.querySelector('#restore-defaults');
-  const apparition = document.querySelector('#apparition');
-  const apparitionMessages = [
-    '방금 저장되지 않은 글이 공개되었습니다',
-    '삭제한 항목이 다른 이름으로 돌아왔습니다',
-    '관리자 권한이 하나 더 감지되었습니다',
-    '초안이 스스로 본문을 늘렸습니다',
-    '이미지는 업로드 전에 복원되었습니다',
-  ];
 
   function readJson(key, fallback) {
     try {

@@ -50,7 +50,7 @@
   container.innerHTML = `
     <article class="record-article">
       <header class="record-hero">
-        <img src="${escapeHtml(record.image)}" alt="${escapeHtml(record.title)}" />
+        <img src="${escapeHtml(record.image)}" alt="${escapeHtml(record.title)}" decoding="async" fetchpriority="high" />
         <div class="record-hero-shade"></div>
         <div class="record-hero-copy">
           <a class="back-link" href="./index.html#archive">← 목록으로</a>
@@ -88,7 +88,7 @@
         <div class="related-grid">
           ${related.map((item) => `
             <a class="related-card" href="./record.html?id=${encodeURIComponent(item.id)}">
-              <img src="${escapeHtml(item.image)}" alt="${escapeHtml(item.title)}" />
+              <img src="${escapeHtml(item.image)}" alt="${escapeHtml(item.title)}" loading="lazy" decoding="async" />
               <span>${escapeHtml(item.code)}</span>
               <strong>${escapeHtml(item.title)}</strong>
             </a>

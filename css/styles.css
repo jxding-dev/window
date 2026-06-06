@@ -3400,3 +3400,122 @@ body::after,
   position: sticky;
   backdrop-filter: none !important;
 }
+
+/* Production polish: readable, static, and client-ready. */
+body {
+  background:
+    radial-gradient(circle at 18% 0%, rgba(121, 14, 20, 0.24), transparent 25rem),
+    radial-gradient(circle at 84% 18%, rgba(29, 74, 50, 0.14), transparent 28rem),
+    linear-gradient(180deg, #050706 0%, #030504 42rem, #070908 100%);
+}
+
+.site-header {
+  min-height: 68px;
+  background: rgba(3, 6, 5, 0.92);
+}
+
+.main-nav a {
+  border-color: rgba(157, 255, 189, 0.04);
+}
+
+.hero {
+  min-height: clamp(620px, 82vh, 820px);
+  padding-top: 7rem;
+  padding-bottom: clamp(3rem, 7vh, 5rem);
+}
+
+.hero-image {
+  filter: saturate(0.92) contrast(1.04) brightness(1.04) !important;
+}
+
+.hero-shade {
+  background:
+    linear-gradient(90deg, rgba(2, 4, 3, 0.76), rgba(2, 4, 3, 0.38) 48%, rgba(2, 4, 3, 0.62)),
+    linear-gradient(180deg, rgba(2, 4, 3, 0.1), rgba(2, 4, 3, 0.76));
+}
+
+.hero-content {
+  transform: none;
+}
+
+.hero-title {
+  max-width: 46rem;
+  font-size: clamp(2.35rem, 4.8vw, 4.9rem);
+  line-height: 1.18;
+}
+
+.hero-copy {
+  max-width: 42rem;
+  color: rgba(215, 208, 195, 0.78);
+  font-size: clamp(0.98rem, 1.4vw, 1.08rem);
+}
+
+.section-title h2 {
+  line-height: 1.24;
+}
+
+.section-guide,
+.image-vault-copy {
+  max-width: 56rem;
+  color: rgba(215, 208, 195, 0.68);
+}
+
+.featured-record,
+.story-card,
+.quick-card,
+.anecdote-card,
+.dream-card,
+.image-only-card,
+.evidence-card,
+.app-panel,
+.admin-status-grid article,
+.admin-record,
+.related-card {
+  border-color: rgba(157, 255, 189, 0.16);
+  background-color: rgba(6, 12, 10, 0.72);
+}
+
+.story-card:hover,
+.story-card.is-selected {
+  transform: none;
+}
+
+.image-only-card:nth-child(2),
+.image-only-card:nth-child(4),
+.admin-status-grid article:nth-child(2),
+.admin-status-grid article:nth-child(3),
+.featured-record {
+  transform: none;
+}
+
+.record-pagination {
+  justify-content: center;
+  margin-top: 1.2rem;
+}
+
+.record-pagination button {
+  min-width: 5.5rem;
+}
+
+.admin-shell {
+  padding-top: 2.5rem;
+}
+
+@media (max-width: 760px) {
+  .hero {
+    min-height: 680px;
+  }
+
+  .hero-title {
+    font-size: clamp(2.25rem, 12vw, 3.45rem);
+  }
+
+  .corner-log,
+  .watcher-panel {
+    position: relative;
+    right: auto;
+    top: auto;
+    bottom: auto;
+    margin-top: 1.4rem;
+  }
+}

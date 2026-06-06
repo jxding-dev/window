@@ -18,14 +18,7 @@
   const watcherCode = document.querySelector('#watcher-code');
   const watcherMessage = document.querySelector('#watcher-message');
   const watcherBar = document.querySelector('#watcher-bar');
-  const apparition = document.querySelector('#apparition');
-  const apparitionMessages = [
-    '방금 뒤에서 열람했습니다',
-    '사진 속 방이 현재 주소와 맞춰졌습니다',
-    '마지막 문단이 먼저 도착했습니다',
-    '열람자 이름이 문서에 없습니다',
-    '뒤로 가면 이전 방으로 돌아갑니다',
-  ];
+  const PAGE_SIZE = 3;
 
   const state = {
     category: 'ALL',
@@ -33,8 +26,6 @@
     visibleRecords: [],
     page: 1,
   };
-
-  const pageSize = 3;
 
   function readJson(key, fallback) {
     try {
@@ -144,7 +135,7 @@
     const bodyPreview = Array.isArray(record.body) ? record.body[0] : record.summary;
     featuredRecord.innerHTML = `
       <div class="featured-image-wrap">
-        <img src="${escapeHtml(record.image)}" alt="${escapeHtml(record.title)}" />
+        <img src="${escapeHtml(record.image)}" alt="${escapeHtml(record.title)}" decoding="async" />
         <span class="danger-chip danger-${escapeHtml(String(record.danger).toLowerCase())}">${dangerLabel(record.danger)}</span>
       </div>
       <div class="featured-copy">
@@ -168,7 +159,7 @@
     list.innerHTML = records.map((record, index) => `
       <article class="story-card ${record.id === state.selectedId ? 'is-selected' : ''}" data-record-id="${escapeHtml(record.id)}" style="--delay:${index * 45}ms">
         <button type="button" class="card-select" data-select-record="${escapeHtml(record.id)}" aria-label="${escapeHtml(record.title)} 선택">
-          <img src="${escapeHtml(record.image)}" alt="${escapeHtml(record.title)}" loading="lazy" />
+          <img src="${escapeHtml(record.image)}" alt="${escapeHtml(record.title)}" loading="lazy" decoding="async" />
         </button>
         <div class="card-content">
           <div class="case-strip">${escapeHtml(record.category)}</div>
@@ -195,7 +186,7 @@
       list.after(pager);
     }
 
-    const totalPages = Math.max(1, Math.ceil(total / pageSize));
+    const totalPages = Math.max(1, Math.ceil(total / PAGE_SIZE));
     if (state.page > totalPages) state.page = totalPages;
 
     if (totalPages <= 1) {
@@ -222,7 +213,7 @@
   function renderEvidence(records) {
     evidenceGrid.innerHTML = records.map((record, index) => `
       <figure class="evidence-card reveal-item" style="--delay:${index * 55}ms">
-        <img src="${escapeHtml(record.image)}" alt="${escapeHtml(record.title)}" loading="lazy" />
+        <img src="${escapeHtml(record.image)}" alt="${escapeHtml(record.title)}" loading="lazy" decoding="async" />
         <figcaption>
           <strong>${escapeHtml(record.code)}.png</strong>
           <span>${escapeHtml(record.category)} / ${escapeHtml(record.recovery)} / ${escapeHtml(record.danger)}</span>
@@ -236,7 +227,7 @@
     imageOnlyGrid.innerHTML = gallery.map((image, index) => `
       <figure class="image-only-card reveal-item" style="--delay:${index * 65}ms">
         <button type="button" data-gallery-image="${escapeHtml(image.id)}" aria-label="${escapeHtml(image.title)} 크게 보기">
-          <img src="${escapeHtml(image.src)}" alt="${escapeHtml(image.title)}" loading="lazy" />
+          <img src="${escapeHtml(image.src)}" alt="${escapeHtml(image.title)}" loading="lazy" decoding="async" />
         </button>
         <figcaption>
           <span>${escapeHtml(image.code)}</span>
@@ -276,7 +267,7 @@
     const dreams = getDreams();
     dreamList.innerHTML = dreams.map((item, index) => `
       <article class="dream-card reveal-item" style="--delay:${index * 55}ms">
-        <img src="${escapeHtml(item.image)}" alt="${escapeHtml(item.title)}" loading="lazy" />
+        <img src="${escapeHtml(item.image)}" alt="${escapeHtml(item.title)}" loading="lazy" decoding="async" />
         <div>
           <span>${escapeHtml(item.date || '오늘')}</span>
           <strong>${escapeHtml(item.mood || '꿈 기록')}</strong>
@@ -291,9 +282,9 @@
     const allRecords = getRecords();
     const filtered = getFilteredRecords();
     state.visibleRecords = filtered;
-    const totalPages = Math.max(1, Math.ceil(filtered.length / pageSize));
+    const totalPages = Math.max(1, Math.ceil(filtered.length / PAGE_SIZE));
     if (state.page > totalPages) state.page = totalPages;
-    const pageRecords = filtered.slice((state.page - 1) * pageSize, state.page * pageSize);
+    const pageRecords = filtered.slice((state.page - 1) * PAGE_SIZE, state.page * PAGE_SIZE);
 
     if (!filtered.some((record) => record.id === state.selectedId)) {
       state.selectedId = pageRecords[0]?.id || filtered[0]?.id || '';
@@ -318,23 +309,6 @@
     document.querySelector('#archive').classList.remove('content-shift');
     window.requestAnimationFrame(() => document.querySelector('#archive').classList.add('content-shift'));
     observeRevealItems();
-  }
-
-  function openRecord(record) {
-    const paragraphs = Array.isArray(record.body) ? record.body : [record.body || record.summary];
-    dialogContent.innerHTML = `
-      <img src="${escapeHtml(record.image)}" alt="${escapeHtml(record.title)}" />
-      <p class="case-strip">${escapeHtml(record.category)}</p>
-      <h2>${escapeHtml(record.title)}</h2>
-      <dl class="dialog-meta">
-        <div><dt>문서 번호</dt><dd>${escapeHtml(record.code)}</dd></div>
-        <div><dt>발견 위치</dt><dd>${escapeHtml(record.location)}</dd></div>
-        <div><dt>발견 시각</dt><dd>${escapeHtml(record.discoveredAt)}</dd></div>
-        <div><dt>복원률</dt><dd>${escapeHtml(record.recovery)}</dd></div>
-      </dl>
-      ${paragraphs.map((text) => `<p>${escapeHtml(text)}</p>`).join('')}
-    `;
-    dialog.showModal();
   }
 
   function selectRecord(id) {
@@ -363,7 +337,7 @@
     const image = (window.RED_WINDOW_GALLERY_IMAGES || []).find((item) => item.id === button.dataset.galleryImage);
     if (!image) return;
     dialogContent.innerHTML = `
-      <img src="${escapeHtml(image.src)}" alt="${escapeHtml(image.title)}" />
+      <img src="${escapeHtml(image.src)}" alt="${escapeHtml(image.title)}" decoding="async" />
       <p class="case-strip">IMAGE ONLY</p>
       <h2>${escapeHtml(image.title)}</h2>
       <dl class="dialog-meta">

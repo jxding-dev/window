@@ -3,26 +3,17 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="description"
+      content="RED WINDOW는 긴 괴담, 실제 일화, 꿈 기록, 복원 이미지를 중심으로 구성한 정적 공포 기록 웹사이트입니다."
+    />
+    <meta property="og:title" content="RED WINDOW" />
+    <meta property="og:description" content="읽기 중심으로 정돈된 기괴한 공포 기록 사이트." />
+    <meta property="og:image" content="./assets/red-window-site-hero.png" />
     <title>RED WINDOW</title>
     <link rel="stylesheet" href="./css/styles.css" />
   </head>
   <body>
-    <div class="noise" aria-hidden="true"></div>
-    <div class="cursor-light" aria-hidden="true"></div>
-    <div class="haunt-layer" aria-hidden="true">
-      <span>뒤돌아보지 마세요</span>
-      <span>기록이 먼저 읽었습니다</span>
-      <span>03:33</span>
-      <span>열람자 불일치</span>
-    </div>
-    <div class="apparition" id="apparition" aria-hidden="true">방금 뒤에서 열람했습니다</div>
-    <div class="terminal-bleed" aria-hidden="true">
-      <span>restore://reader_shadow.diff</span>
-      <span>face_match: failed</span>
-      <span>window_count: +1</span>
-      <span>do_not_scroll_back</span>
-    </div>
-
     <header class="site-header">
       <a class="brand glitch-text" href="#top" data-text="RED WINDOW">RED WINDOW</a>
       <nav class="main-nav" aria-label="주요 메뉴">
@@ -39,7 +30,13 @@
 
     <main>
       <section class="hero" id="top">
-        <img src="./assets/red-window-site-hero.png" alt="비 오는 골목의 붉은 창문" class="hero-image" />
+        <img
+          src="./assets/red-window-site-hero.png"
+          alt="비 오는 골목의 붉은 창문"
+          class="hero-image"
+          decoding="async"
+          fetchpriority="high"
+        />
         <div class="hero-shade"></div>
         <div class="hero-content">
           <p class="kicker">03:33 / PRIVATE RECOVERY INDEX / READER MISMATCH</p>
@@ -137,7 +134,7 @@
           <div>
             <i>observer: attached</i>
             <i>post_focus: locked</i>
-            <i>outside_noise: contained</i>
+            <i>external_signal: contained</i>
           </div>
         </aside>
         <div class="archive-console" aria-label="기록 제어 패널">
@@ -227,7 +224,6 @@
     </dialog>
 
     <script src="./data/data.js"></script>
-    <script src="./js/fear.js"></script>
     <script src="./js/main.js"></script>
   </body>
 </html>
